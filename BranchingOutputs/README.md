@@ -8,8 +8,8 @@ Optional flags:
 
 For `depending_on_pubsub_message.py`
 
---topic <full topic name>
+`--topic <full topic name>`
 
 For `multiple_topics_depending_message.py`
 
---topic_prefix <full topic name prefix>
+`--topic_prefix <full topic name prefix>`
