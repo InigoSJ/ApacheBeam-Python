@@ -17,7 +17,6 @@ default_topic = 'projects/<project>/topics/<topic>'
 project = '<project>'
 
 
-
 def run(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('--topic',
@@ -28,7 +27,7 @@ def run(argv=None):
         def process(self, element):
             dictionary = yaml.load(element)
             now_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            writer = filesystems.FileSystems.create(dictionary['destination']+'{}-report.json'.format(now_str))
+            writer = filesystems.FileSystems.create(dictionary['destination'] + '{}-report.json'.format(now_str))
             dictionary.pop('destination')
             writer.write(str(dictionary))
             writer.close()
@@ -39,10 +38,9 @@ def run(argv=None):
     pipeline_options = PipelineOptions(pipeline_args)
     pipeline_options.view_as(SetupOptions).save_main_session = True
 
-
     with beam.Pipeline(options=pipeline_options) as p:
         (p | "ReadTopic" >> beam.io.ReadFromPubSub(topic=known_args.topic)
-           | "WriteToGCSDynamic" >> beam.ParDo(WriteToSeparateFiles()))
+         | "WriteToGCSDynamic" >> beam.ParDo(WriteToSeparateFiles()))
 
 
 if __name__ == "__main__":

@@ -20,7 +20,6 @@ project = '<project>'
 WINDOW_LENGTH = 60 * 2  # 60 secs * 2 min
 
 
-
 def run(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('--topic',
@@ -36,7 +35,9 @@ def run(argv=None):
 
         def process(self, element):
             now = datetime.now()
-            writer = filesystems.FileSystems.create(path=self.outdir + '{}/{}/{}/{}:{}-report.json'.format(now.year, now.month, now.day, now.hour, now.minute))
+            writer = filesystems.FileSystems.create(
+                path=self.outdir + '{}/{}/{}/{}:{}-report.json'.format(now.year, now.month, now.day, now.hour,
+                                                                       now.minute))
             writer.write(element)
             writer.close()
 
@@ -50,13 +51,11 @@ def run(argv=None):
         string = str(elements)
         return string.replace('},', '};')
 
-
     with beam.Pipeline(options=pipeline_options) as p:
-
         (p | "ReadTopic" >> beam.io.ReadFromPubSub(topic=known_args.topic)
-           | "Window" >> beam.WindowInto(window.FixedWindows(WINDOW_LENGTH))
-           | "Combine" >> beam.CombineGlobally(string_join).without_defaults()
-           | "WriteToGCSwithDate" >> beam.ParDo(WriteToSeparateFiles(known_args.bucket)))
+         | "Window" >> beam.WindowInto(window.FixedWindows(WINDOW_LENGTH))
+         | "Combine" >> beam.CombineGlobally(string_join).without_defaults()
+         | "WriteToGCSwithDate" >> beam.ParDo(WriteToSeparateFiles(known_args.bucket)))
 
 
 if __name__ == "__main__":
