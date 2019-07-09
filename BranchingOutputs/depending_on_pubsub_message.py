@@ -31,8 +31,7 @@ def run(argv=None):
                         default=default_bucket)
 
     known_args, pipeline_args = parser.parse_known_args(argv)
-    pipeline_args.extend(['--project={}'.format(project)])
-
+    pipeline_args.extend(['--project={}'.format(project), '--streaming', '--experiments=allow_non_updatable_job'])
     pipeline_options = PipelineOptions(pipeline_args)
     pipeline_options.view_as(SetupOptions).save_main_session = True
 
