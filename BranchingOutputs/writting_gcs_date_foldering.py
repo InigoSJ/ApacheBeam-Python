@@ -13,9 +13,9 @@ from apache_beam import window
 import yaml
 
 # TODO
-default_topic = 'projects/inigo-sj/topics/path'
-default_bucket = 'gs://inigo/pipelines/gcsdynamic/'
-project = 'inigo-sj'
+default_topic = 'projects/<project>/topics/<topic>'
+default_bucket = 'gs://<bucket>'
+project = '<project>'
 
 WINDOW_LENGTH = 60 * 2  # 60 secs * 2 min
 

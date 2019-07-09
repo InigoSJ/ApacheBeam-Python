@@ -13,8 +13,9 @@ from apache_beam import window
 import yaml
 
 # TODO
-default_topic = 'projects/inigo-sj/topics/dynamic'
-project = 'inigo-sj'
+default_topic = 'projects/<project>/topics/<topic>'
+project = '<project>'
+
 
 
 def run(argv=None):
