@@ -1,6 +1,6 @@
 Run with:
  
-`python <file> --streaming --temp_location=<path to gcs folder> --runner=DataflowRunner  --experiments=allow_non_updatable_job`
+`python <file>  --temp_location=<path to gcs folder> --runner=DataflowRunner`
 
 Optional flags:
 
