@@ -18,7 +18,7 @@ default_topic = 'projects/<project>/topics/<topic_prefix>'  # this is a prefix
 default_bucket = 'gs://<bucket>'
 project = '<project>'
 
-WINDOW_LENGTH = 60 * 2  # 60 secs *10 min
+WINDOW_LENGTH = 60 * 2  # 60 secs * 2 min
 BRANCHES = 3
 
 
